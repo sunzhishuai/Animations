@@ -1,49 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.newborntown.animations.reveal.ClipRevealFrame xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reveal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_sample"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@mipmap/belle9" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_bright">
 
-    <RadioGroup
-        android:id="@+id/rg_group"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_sample"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@mipmap/belle9" />
 
-        <RadioButton
-            android:id="@+id/rb_left_top"
+        <RadioGroup
+            android:id="@+id/rg_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="左上" />
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rb_center"
+            <RadioButton
+                android:id="@+id/rb_left_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="左上" />
+
+            <RadioButton
+                android:id="@+id/rb_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="中心" />
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/rb_reverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="中心" />
-    </RadioGroup>
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/rg_group"
+            android:text="反转" />
 
-    <CheckBox
-        android:id="@+id/rb_reverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/rg_group"
-        android:text="反转" />
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/rb_reverse"
+            android:text="重置" />
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/rb_reverse"
-        android:text="重置" />
-</RelativeLayout>
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/go"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束" />
+    </RelativeLayout>
+</com.newborntown.animations.reveal.ClipRevealFrame>

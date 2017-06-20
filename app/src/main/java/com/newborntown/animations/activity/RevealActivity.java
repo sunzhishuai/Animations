@@ -2,6 +2,8 @@ package com.newborntown.animations.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 
 import com.newborntown.animations.R;
+import com.newborntown.animations.reveal.ClipRevealFrame;
 
 /**
  * Created by sunzhishuai on 17/6/15.
@@ -25,6 +28,7 @@ public class RevealActivity extends BaseActivity implements View.OnClickListener
     private Animator circularReveal;
     private RadioButton mLeftTop;
     private CheckBox mReverse;
+    private ClipRevealFrame mRevealView;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -36,6 +40,9 @@ public class RevealActivity extends BaseActivity implements View.OnClickListener
         mLeftTop = (RadioButton) findViewById(R.id.rb_left_top);
         mReverse = (CheckBox) findViewById(R.id.rb_reverse);
         findViewById(R.id.btn).setOnClickListener(this);
+        mRevealView = (ClipRevealFrame) findViewById(R.id.reveal);
+        findViewById(R.id.go).setOnClickListener(this);
+
     }
 
     /**
@@ -83,6 +90,28 @@ public class RevealActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.btn:
                 mSample.setVisibility(View.VISIBLE);
+                break;
+            case R.id.go:
+                double r = Math.sqrt(Math.pow(mRevealView.getWidth(), 2) + Math.pow(mRevealView.getHeight(), 2));
+                mRevealView.setClipCenter(0,0);
+                mRevealView.setClipOutLines(true);
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(((float) r), 0);
+                valueAnimator.setDuration(1000);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float animatedValue = (float) animation.getAnimatedValue();
+                        mRevealView.setClipRadius(animatedValue);
+                    }
+                });
+                valueAnimator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        finish();
+                    }
+                });
+                valueAnimator.start();
                 break;
         }
     }
